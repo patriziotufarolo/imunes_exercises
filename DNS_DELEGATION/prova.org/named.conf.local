@@ -1,0 +1,6 @@
+zone "prova.org" {
+    type master;
+    file "/etc/bind/db.prova.org";
+};
+
+

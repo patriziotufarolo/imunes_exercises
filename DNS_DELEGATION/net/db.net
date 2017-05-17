@@ -1,0 +1,7 @@
+$TTL 60000
+@	IN	SOA	dns.net.	root.dns.net (1 28800 14400 36000000 0)
+@	IN	NS	dns.net.
+dns.net.	IN	A	10.0.0.13
+
+prova.net.	IN	NS	dns.prova.net.
+dns.prova.net. IN	A	10.0.0.16

@@ -1,0 +1,7 @@
+$TTL 60000
+@	IN	SOA	dns.org.	root.dns.org (1 28800 14400 36000000 0)
+@	IN	NS	dns.org.
+dns.org.	IN	A	10.0.0.11
+
+prova.org.	IN	NS	dns.prova.org.
+dns.prova.org. IN	A	10.0.0.14

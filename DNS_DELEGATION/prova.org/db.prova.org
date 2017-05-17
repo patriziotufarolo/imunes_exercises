@@ -1,0 +1,8 @@
+$ORIGIN prova.org.
+$TTL 60000
+@	IN	SOA	dns.prova.org.	root.prova.org (1 28800 14400 36000000 0)
+@	IN	NS	dns.prova.org.
+dns.prova.org. IN	A	10.0.0.11
+
+pc1		IN	A	10.0.0.20
+pc2 	IN	A	10.0.0.21

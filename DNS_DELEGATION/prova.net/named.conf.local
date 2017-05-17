@@ -1,0 +1,6 @@
+zone "prova.net" {
+    type master;
+    file "/etc/bind/db.prova.net";
+};
+
+

@@ -1,0 +1,13 @@
+$TTL 60000
+@	IN	SOA	root.	root.root (1 28800 14400 36000000 0)
+@	IN	NS	root.
+root.	IN	A	10.0.0.10
+
+com.	IN	NS	dns.com.
+dns.com.	IN	A	10.0.0.12
+
+org.	IN	NS	dns.org.
+dns.org.	IN	A	10.0.0.11
+
+net.	IN	NS	dns.net.
+dns.net.	IN	A	10.0.0.13

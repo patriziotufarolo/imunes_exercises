@@ -1,0 +1,273 @@
+node n0 {
+    type lanswitch
+    network-config {
+	hostname switch1
+	!
+    }
+    canvas c0
+    iconcoords {432 312}
+    labelcoords {432 335}
+    interface-peer {e0 n1}
+    interface-peer {e1 n2}
+    interface-peer {e2 n3}
+    interface-peer {e3 n4}
+    interface-peer {e4 n5}
+    interface-peer {e5 n6}
+}
+
+node n1 {
+    type pc
+    network-config {
+	hostname pc1
+	!
+	interface eth0
+	 ip address 10.0.0.20/24
+	 ipv6 address fc00::20/64
+	 mac address 42:00:aa:00:00:00
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {288 144}
+    labelcoords {288 175}
+    interface-peer {eth0 n0}
+}
+
+node n2 {
+    type pc
+    network-config {
+	hostname pc2
+	!
+	interface eth0
+	 ip address 10.0.0.21/24
+	 ipv6 address fc00::21/64
+	 mac address 42:00:aa:00:00:01
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {552 144}
+    labelcoords {552 175}
+    interface-peer {eth0 n0}
+}
+
+node n3 {
+    type pc
+    network-config {
+	hostname pc3
+	!
+	interface eth0
+	 ip address 10.0.0.22/24
+	 ipv6 address fc00::22/64
+	 mac address 42:00:aa:00:00:02
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {168 480}
+    labelcoords {168 511}
+    interface-peer {eth0 n0}
+}
+
+node n4 {
+    type pc
+    network-config {
+	hostname pc4
+	!
+	interface eth0
+	 ip address 10.0.0.23/24
+	 ipv6 address fc00::23/64
+	 mac address 42:00:aa:00:00:03
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {288 480}
+    labelcoords {288 511}
+    interface-peer {eth0 n0}
+}
+
+node n5 {
+    type pc
+    network-config {
+	hostname pc5
+	!
+	interface eth0
+	 ip address 10.0.0.24/24
+	 ipv6 address fc00::24/64
+	 mac address 42:00:aa:00:00:04
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {624 480}
+    labelcoords {624 511}
+    interface-peer {eth0 n0}
+}
+
+node n6 {
+    type pc
+    network-config {
+	hostname pc6
+	!
+	interface eth0
+	 ip address 10.0.0.25/24
+	 ipv6 address fc00::25/64
+	 mac address 42:00:aa:00:00:05
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {696 480}
+    labelcoords {696 511}
+    interface-peer {eth0 n0}
+}
+
+link l0 {
+    nodes {n0 n1}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n0 n2}
+    bandwidth 0
+}
+
+link l2 {
+    nodes {n0 n3}
+    bandwidth 0
+}
+
+link l3 {
+    nodes {n0 n4}
+    bandwidth 0
+}
+
+link l4 {
+    nodes {n0 n5}
+    bandwidth 0
+}
+
+link l5 {
+    nodes {n0 n6}
+    bandwidth 0
+}
+
+annotation a0 {
+    type rectangle
+    iconcoords {528 432 811 526}
+    color #24b3d9
+    bordercolor black
+    width 0
+    rad 25
+    canvas c0
+}
+
+annotation a1 {
+    type rectangle
+    iconcoords {82 432 365 526}
+    color #24b3d9
+    bordercolor black
+    width 0
+    rad 25
+    canvas c0
+}
+
+annotation a2 {
+    type rectangle
+    iconcoords {82 432 365 526}
+    color #24b3d9
+    bordercolor black
+    width 0
+    rad 25
+    canvas c0
+}
+
+annotation a3 {
+    type rectangle
+    iconcoords {241 81 602 188}
+    color #24b3d9
+    bordercolor black
+    width 0
+    rad 25
+    canvas c0
+}
+
+annotation a4 {
+    type text
+    iconcoords {554 543}
+    label {VLAN Studenti (30)}
+    labelcolor black
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a5 {
+    type text
+    iconcoords {260 67}
+    label {VLAN Segreteria (10)}
+    labelcolor black
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a6 {
+    type text
+    iconcoords {260 67}
+    label {VLAN Segreteria (10)}
+    labelcolor black
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a7 {
+    type text
+    iconcoords {100 544}
+    label {VLAN Segreteria (20)}
+    labelcolor black
+    font {TkTextFont}
+    canvas c0
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names yes
+    ip_addresses yes
+    ipv6_addresses yes
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    hostsAutoAssign no
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+

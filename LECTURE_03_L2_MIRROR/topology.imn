@@ -1,0 +1,146 @@
+node n0 {
+    type lanswitch
+    network-config {
+	hostname switch1
+	!
+    }
+    canvas c0
+    iconcoords {408 216}
+    labelcoords {408 239}
+    interface-peer {e0 n1}
+    interface-peer {e1 n2}
+    interface-peer {e2 n3}
+}
+
+node n1 {
+    type pc
+    network-config {
+	hostname pc1
+	!
+	interface eth0
+	 ip address 10.0.0.20/24
+	 ipv6 address fc00::20/64
+	 mac address 42:00:aa:00:00:00
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {216 336}
+    labelcoords {216 367}
+    interface-peer {eth0 n0}
+}
+
+node n2 {
+    type pc
+    network-config {
+	hostname pc2
+	!
+	interface eth0
+	 ip address 10.0.0.21/24
+	 ipv6 address fc00::21/64
+	 mac address 42:00:aa:00:00:01
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {624 336}
+    labelcoords {624 367}
+    interface-peer {eth0 n0}
+}
+
+node n3 {
+    type pc
+    network-config {
+	hostname sonda
+	!
+	interface eth0
+	 ip address 10.0.0.22/24
+	 ipv6 address fc00::22/64
+	 mac address 42:00:aa:00:00:02
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {408 72}
+    labelcoords {408 103}
+    customIcon img_0
+    interface-peer {eth0 n0}
+}
+
+link l0 {
+    nodes {n1 n0}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n0 n2}
+    bandwidth 0
+}
+
+link l2 {
+    nodes {n0 n3}
+    bandwidth 0
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names yes
+    ip_addresses yes
+    ipv6_addresses yes
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    hostsAutoAssign no
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+
+image img_0 {
+    referencedBy {n3}
+    type {customIcon}
+    file {/usr/local/lib/imunes/icons/normal/packgen.gif}
+    data {R0lGODlhLQAtAOfyAAF3qAF3qQJ4qQR6qwV6qwZ7rAd8rACM0ACN0ACO0QCP0QCQ0QCQ0gCR0gCS
+          0gCS0wCS1ACT0wCT1ACU0wCU1ACV0wCV1ACV1QKV0wCW1ACW1SqNtgKW1SiOuASW1AKX1QeW0QKX
+          1imPuCyPuAaY1giZ1gqa1gua1g6a1A6b1hGb1Q+c1xKc1Q+d2BKd2BSd1hWd1hGe2Rad1hed1Red
+          1hee1hif2Rmg2hqh2hyh2iGg1hyi2h2i2yCj2yCk2yaj1yKk2yij1ySl3Cal2yim2iSn3j6iy0Ck
+          zUGkzS+o20Km0DKq2y6s4DOt4Tis3TSv4jOw5D2u3Tiw40Ku2zax5Tex4zmx4zqx4zux40Cw3ziy
+          5Uav2zqy5D2y40Wx3j2z5Uix3Uqx3T205kux3T+05kqy3UG05UK05Uyy3UG15kC250K25kK36Eu2
+          5Uu35U235VS230645k+45U+45lW44Vq44Fi54k++7F+842G842a74F6952O94l++5mS941fA7WS+
+          41TC71fC8ErK/2/C5EzK/0zL/03L/07L/0/L/2vF61DM/3DF6HDF6VHM/2zG61LM/2HJ9WfI8GPJ
+          9FLN/1PN/1TN/1XN/3DH61LO/1bN/nHH61PO/1fN/lTO/2/I7VXO/1nN/nHI7VbP/1rO/lrO/1nP
+          /1vP/2XN+F/P/VzQ/2DP/mXO+mLP/HjK7VvR/1zR/2TP/GXP+17R/2LQ/lvS/13S/17S/2vP91/S
+          /2fQ/WHS/17T/3XO8mzQ+mjR/W3Q+W3Q+mnR/HfO8WLT/27Q+njO8WbS/2vR+2PT/2zR+2TT/3HQ
+          94PM6m3R+m3R+3LQ927R+njP8m/R+XnP82XU/4DO7m3T/WnU/2jV/4LP72zV/37R83rS93/R83HV
+          /3TV/oLS84fR73PX/3jW/XnW/nrW/XjX/4vT8HnX/nrX/n3Y/XrZ/33Z/n3Z/4bY+o/e/5Hf////
+          /////////////////////////////////////////////////////yH5BAEKAP8ALAAAAAAtAC0A
+          AAj+AP8JHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mjx3zp37tqJbAeSZDt28Tr+U5bJk8uX
+          MDmdQiIwFKhg4i6KInOmp8+fZ774AfBP0jFThToJs1axDYMHUKNKfZCgjIF/IHAI+vZqkSVW3ibK
+          iUChrNmzFBiE6fBPRoQGKe5cy5UIUixqEffwAMK3r18gNxgJpGFBA4UFJtIoS3YIUqpuKgXOsHBB
+          g4UMDTxUKVYNFKJVzB5KG2astOnTvdD9e0FZw4XCFBo4aBJpmyNHpaAxJFfLlu/fwHndUvKPResL
+          yAt/eBChyCRssAyR8pVwk5o12LNrXyMGkIDiFi7+a8gwvryFCQp6BBo3ytElYOEMtkmwoL79+wsO
+          jCkAvjLy165pIKAGDzhwwh+/7DKIJrpoQ1AcEKAlIQNgbPAPYZUNSF55AhamgQIusAHOLJVQIgs3
+          AuXxQxAstuhiEDoQIllrA9Zoo4CxVWAGKtkgAgktzUREmI0b3tihZQtgwAQupbQy0DTORCPllFQi
+          884/MNAoYJFGHknBAxZgMpA6xCRj5ploLrPMEeBdFl54lmWQwZt0WvaAC04Q9AgVWvTp559aQIEH
+          AeAR2aWAEVywghcGvdFABJBGKmkECqAxwD8qaMkhl+E9sMMUCLmhQAOklmpqAwhsMcI/NWhaJGWd
+          HESggQ10KKSIFVdgoeuuvD7hyoyGdiiBBT7A0dFkl70GoGEXEGEHROakI+201JZzDjyrvQmgBQ+Q
+          MIQeET3TEkzkeqKKEW2SZwEFISwx0SdcdCHvvPR2IQUfARSqQQMtJNHUU1NNVdVVLEhAQQlZXDQH
+          WRKepZYI/6AQQxQZ9QGEEBhnrLEQOTQiUB2RhSzyyCSXbPLJKKescskBAQA7}
+}
+

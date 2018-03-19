@@ -28,6 +28,7 @@ do_cmd() {
 	echo -n $msg
 	eval "$cmd" 2>/dev/null 1>/dev/null
 	ok_colorato_per_log ${#msg}
+	read -rsp $'\nPremere invio per continuare...\n'
 }
 do_cmd_pid() {
 	local cmd;

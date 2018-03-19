@@ -30,6 +30,7 @@ do_cmd() {
 	echo
 	echo -n "$msg"
 	ok_colorato_per_log ${#msg}
+	read -rsp $'\nPremere invio per continuare...\n'
 }
 
 sudo -i exit

@@ -30,10 +30,11 @@ do_cmd() {
 	echo
 	echo -n "$msg"
 	ok_colorato_per_log ${#msg}
+	read -rsp $'\nPremere invio per continuare...\n'
 }
 
 sudo -i exit
 
-do_cmd "sudo himage pc1 ping -c 5 10.0.0.2"							"=> Ping pc1 => pc2"
-do_cmd "sudo himage pc2 ping -c 5 10.0.0.1"							"=> Ping pc2 => pc1"
+do_cmd "sudo himage pc1 ping -c 5 10.0.0.21"							"=> Ping pc1 => pc2"
+do_cmd "sudo himage pc2 ping -c 5 10.0.0.20"							"=> Ping pc2 => pc1"
 echo

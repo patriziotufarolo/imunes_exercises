@@ -201,7 +201,6 @@ annotation a0 {
     color #18b8b0
     bordercolor black
     width 0
-    rad 25
     canvas c0
 }
 
@@ -211,7 +210,6 @@ annotation a1 {
     color #80c9d3
     bordercolor black
     width 0
-    rad 25
     canvas c0
 }
 
@@ -221,7 +219,6 @@ annotation a2 {
     color #8098d3
     bordercolor black
     width 0
-    rad 25
     canvas c0
 }
 
@@ -229,6 +226,33 @@ annotation a3 {
     type text
     iconcoords {366 272}
     label {trunk={10,20}}
+    labelcolor black
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a4 {
+    type text
+    iconcoords {507 518}
+    label {VLAN 30 - Studenti}
+    labelcolor black
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a5 {
+    type text
+    iconcoords {347 38}
+    label {VLAN 20 - Segreteria}
+    labelcolor black
+    font {TkTextFont}
+    canvas c0
+}
+
+annotation a6 {
+    type text
+    iconcoords {359 245}
+    label {VLAN 10 - Docenti}
     labelcolor black
     font {TkTextFont}
     canvas c0

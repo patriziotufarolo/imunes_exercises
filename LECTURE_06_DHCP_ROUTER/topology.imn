@@ -1,0 +1,384 @@
+node n0 {
+    type host
+    network-config {
+	hostname DHCPServer
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:00
+	 ip address 192.168.0.2/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {168 264}
+    labelcoords {168 300}
+    interface-peer {eth0 n1}
+}
+
+node n1 {
+    type lanswitch
+    network-config {
+	hostname Switch
+	!
+    }
+    canvas c0
+    iconcoords {432 264}
+    labelcoords {432 287}
+    interface-peer {e0 n0}
+    interface-peer {e1 n2}
+    interface-peer {e2 n4}
+    interface-peer {e3 n5}
+    interface-peer {e4 n6}
+    interface-peer {e5 n7}
+    interface-peer {e6 n8}
+    interface-peer {e7 n9}
+    interface-peer {e8 n10}
+    interface-peer {e9 n11}
+}
+
+node n2 {
+    type router
+    model quagga
+    network-config {
+	hostname RouterInternet
+	!
+	interface eth1
+	 mac address 42:00:aa:00:00:02
+	 ip address 159.149.70.150/24
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:01
+	 ip address 192.168.0.1/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	router rip
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf
+	 network 0.0.0.0/0
+	!
+	router ripng
+	 redistribute static
+	 redistribute connected
+	 redistribute ospf6
+	 network ::/0
+	!
+    }
+    canvas c0
+    iconcoords {432 72}
+    labelcoords {432 97}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n3}
+}
+
+node n3 {
+    {}
+    type host
+    network-config {
+	hostname hostRemoto
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:03
+	 ip address 159.149.70.151/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+	ip route 192.168.0.0/24 159.149.70.150
+	!
+    }
+    canvas c0
+    iconcoords {720 72}
+    labelcoords {720 108}
+    interface-peer {eth0 n2}
+    custom-selected {}
+}
+
+node n4 {
+    type host
+    network-config {
+	hostname ServerStatico1
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:04
+	 ip address 192.168.0.3/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {816 144}
+    labelcoords {816 180}
+    interface-peer {eth0 n1}
+}
+
+node n5 {
+    type host
+    network-config {
+	hostname ServerStatico2
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:05
+	 ip address 192.168.0.4/24
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {816 264}
+    labelcoords {816 300}
+    interface-peer {eth0 n1}
+}
+
+node n6 {
+    type pc
+    network-config {
+	hostname CEODESKTOP
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:06
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {624 432}
+    labelcoords {624 463}
+    interface-peer {eth0 n1}
+}
+
+node n7 {
+    type pc
+    network-config {
+	hostname CEOLAPTOP
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:07
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {720 432}
+    labelcoords {720 463}
+    customIcon img_0
+    interface-peer {eth0 n1}
+}
+
+node n8 {
+    type pc
+    network-config {
+	hostname pc3
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:08
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {144 504}
+    labelcoords {144 535}
+    interface-peer {eth0 n1}
+}
+
+node n9 {
+    type pc
+    network-config {
+	hostname pc4
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:09
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {216 504}
+    labelcoords {216 535}
+    interface-peer {eth0 n1}
+}
+
+node n10 {
+    type pc
+    network-config {
+	hostname pc5
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:0a
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {288 504}
+    labelcoords {288 535}
+    interface-peer {eth0 n1}
+}
+
+node n11 {
+    type pc
+    network-config {
+	hostname pc6
+	!
+	interface eth0
+	 mac address 42:00:aa:00:00:0b
+	!
+	interface lo0
+	 type lo
+	 ip address 127.0.0.1/24
+	 ipv6 address ::1/128
+	!
+    }
+    canvas c0
+    iconcoords {360 504}
+    labelcoords {360 535}
+    interface-peer {eth0 n1}
+}
+
+link l0 {
+    nodes {n0 n1}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n1 n2}
+    bandwidth 0
+}
+
+link l2 {
+    nodes {n2 n3}
+    bandwidth 0
+}
+
+link l3 {
+    nodes {n1 n4}
+    bandwidth 0
+}
+
+link l4 {
+    nodes {n1 n5}
+    bandwidth 0
+}
+
+link l5 {
+    nodes {n1 n6}
+    bandwidth 0
+}
+
+link l6 {
+    nodes {n1 n7}
+    bandwidth 0
+}
+
+link l7 {
+    nodes {n1 n8}
+    bandwidth 0
+}
+
+link l8 {
+    nodes {n9 n1}
+    bandwidth 0
+}
+
+link l9 {
+    nodes {n1 n10}
+    bandwidth 0
+}
+
+link l10 {
+    nodes {n11 n1}
+    bandwidth 0
+}
+
+canvas c0 {
+    name {Canvas0}
+}
+
+option show {
+    interface_names yes
+    ip_addresses yes
+    ipv6_addresses yes
+    node_labels yes
+    link_labels yes
+    background_images no
+    annotations yes
+    hostsAutoAssign no
+    grid yes
+    iconSize normal
+    zoom 1.0
+}
+
+image img_0 {
+    referencedBy {n7}
+    type {customIcon}
+    file {/usr/local/lib/imunes/icons/normal/pc.gif}
+    data {R0lGODlhLQApAPf/AKmplfHx8nV1XkpKJObm1eHh3oWFbrKyroiIbbOznZWVgWRkRMLCusnJqdra
+          upGRf3V1WL+/oISEXNDQzO7u28rKxd7e3+DgwUdHOXFxVdnZ1vb27bW1pbW1svj45oODbKGhkYmJ
+          ZuTk5IKCaV5ePd3dvV1dSdbWus3Nrfr66JmZhnBwWq6umvb25HV1SJSUeba2jpOTf1lZRIuLdsHB
+          or6+u+DgvPX146Skm319bYeHcYWFYdbW097euYmJcGJiS5KSduXl042Ncm5uWI2NeNTUtMvLp+Li
+          wp6ej/Dw3+3tztLSssTEpFZWQfn5+aamlp2dic7OyZKSd3h4YHl5XvDwztTUsOjo1o+PdfT09n19
+          ZsrKrVNTO8jIs1dXU9bWt9bWsuvr2urq2OTkwSoqJ2trTaSkk8LCot3d2XR0V9zcy2FhPsbGn///
+          96GhiqqqmYGBcLi4kGlpV1NTK8fHpvLy0b6+ldnZtIqKaf//+HNzX7y8q+TkxXJyXF1dNLu7km5u
+          Vvb2+dLStMjIuYmJeq+vo8bGv5WVfX9/aNfX1PX19H5+YvX10vLy4MTEourq2nR0Rp6egsDAodra
+          ttTU0JeXhE5OKtDQss7OsMjIw3p6TcfHqMLCpOjo2MDAmmlpQ7m5pff31U1NRujo51ZWS8bGpUVF
+          I///8qCgj/3965OTclFRRmRkUH19ULm5tYWFdNXVs3t7ZMXFpsHBr///+7u7lKampNvb2dratMvL
+          xnh4W4yMa////wAAAMLCofPz9dfXsd/f4P///OfnytfXtf7+7FVVONXVtdjYs/b29e7u7bq6kf39
+          3Pj4+L+/mNLSr46OhKGhh76+p8zMqtzct4CAWcrKtOrqxqOjlNLSvtPTz9LS1tvbx/j47e/v0ZaW
+          eZmZf6urlnNzU+zs8Le3j66ujff39unp3aamj25uUMDAq4GBU4qKYMTEnenp2To6ILi4k5iYkI+P
+          e9XV0tDQsdPTsv///vz8+3l5a9jYt4KCYYGBZ4eHZISEaO/v3f///yH5BAEAAP8ALAAAAAAtACkA
+          AAj/AP8JHChw3gh5MxIqJEJEnsMHECPGUFCpogoVOCph0ECwI8F56k4Ja0OypMk8KGnREmaPl8uX
+          vDYgIKHNY0dzOD5ISxCuZzgAQIMC9cmiaIIEHECBmjWozJwyiWwSzFVG3yJdWCFohZCma9etWKlQ
+          WbRoXz8EL7hYWrcgqlSBhiLduWOjB7VJuO4gA8a3LzBkdyZR62FjzJhrY5QsmtNqAY+3AitIMVIO
+          zy48IULw47ejs+cd/DJbFqJK1bcIF6jM0eQY8r9ML9hMsVXDVYfbB3Lr1n3blasaNSrYMjCGiiXW
+          jyFn+rZMB8zn0KOP0zFJ1/E181zD/qMjQPTv0IP5/8gHwZKLNcnfwm7uHbx7XuKRQRhwPr3UCi/i
+          GGj//nswA2CkQR96rklGzn79gWcBgAK6QIJ9NlUABDkf8JfgcxZ8YEUGA0BCgltvSQhDhRdGl+GG
+          9H3oWi5AjGhhiS6dyKGDHEHGIoUvwihjhyTU+FYuUuAII4YacujhLa5FkR+CQ760o4NoJLlkjiUu
+          CMuMJEQJ2QQvwMNkk/AxyKMFrk1wSC3dgelSMDoQ0yAJBbimwZkzOKEmL6O0OZ8LC4ziWg3geJKD
+          CIFkYaihvySqqKKHGhrINvs4MF8rxszjRDPmJKNIMgPdg4Qe/aCACD6EvALHqXDkoOqqqp76yiuE
+          EP/yQA5YHJGGH2v04gUHb7xxQCFyCBTAEx50sUsPd7TjiTN2/LFMHHGQA8O05EC7zB92OONJO2xM
+          MwYjIbyjax68tOGSG8b8EwAHjbRhTRNTTBFLvPEKYO+9+ApAbyyxaOGvARjoao8wxcSEyBoQ3IJK
+          Nmpkww0ZvUQs8cQUV2yxKP4QoIY7aFDhBzsZmBALIgL0IcAQJvxgggkytCxDEzDHHLPLK//ACity
+          5EyEDlrA8UoTfkiwQwYjlECHLEzQ0AAKDTRARylMMOGIL1RXTfUZjshSCh3TPFMPLMTkU8IXS3xx
+          zAkLfFLN0DOMUcQSmGAyzRZOl4I0E2f4QsPefJ//cUbUdk/zddgOlHDBEXwgnoHaO6TjwwWXoLAF
+          3ZsgzQkNkkgSweacdy7J3pdEgwEGoqyyCimor5KAEoB8IgHIM0COCdObVM4EJ5xkrnnnnH9OwxnT
+          JDCDPBNVcpEbUGwxTOvsiKPNDHwIckkRJTjgQD5fmF3E9vXUs8T33W8PyzHEwHJBFVXUwUgooTBT
+          hxJ8XLACJBDk8g8CdRhOgxBYCOG/DwD0AQIGSEACBtAH/uOfFF7wgki4AQVKGIY3dCEDSggEDuhw
+          Qww+gI03PMEMZgCBCFFBQiSYEAkkRIUIQYANMzzhCQDoVSH28I4fJAAdLGCFIQZSgAmIIB6DaEMq
+          yVKQAg8YsQVIbMENlrjEJBrRiERMRTFOwQsWmAIa2ohCJuLUkVHMog1JCEMY3HEFApiRAEFIoxrV
+          eMYrXEEMYqRAG/ZgiilApgCDOEUqPKDERjQiCYBMgj8GSUhCBtKPTMyDGgZgjAC85R446IYHBkmB
+          MDxCDJ3ohBvPyEkzuvEK7oBjGFpwDi78QBmQYUAM3gAFKFykIgqIZQxmGZFaznKWsaQIKmRgCVSm
+          EhHzslcf+rCCYq5gmMgcpjFXMIRmOrMPcliFliATEAA7}
+}
+

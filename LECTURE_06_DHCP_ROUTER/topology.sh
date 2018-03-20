@@ -25,7 +25,7 @@ do_cmd() {
 	cmd="$1"
 	msg="$2"
 	echo
-	echo -e $bldgrn $cmd $Color_Off;
+	echo -e ${bldgrn}"${cmd}"${Color_Off}
 	eval "$cmd" 2>/dev/null
 	echo
 	echo -n "$msg"
@@ -89,6 +89,6 @@ done
 do_cmd "sudo himage CEODESKTOP ip addr show dev eth0" "Mostro l'ip di CEODESKTOP"
 do_cmd "sudo himage CEOLAPTOP ip addr show dev eth0" "Mostro l'ip di CEOLAPTOP"
 
-if pidof $pid1; then
+if kill -0 $pid1; then
 	kill -9 $pid1
 fi

@@ -1,8 +1,6 @@
 # Lezione 1 - Software Defined Networking e IMUNES
-## Realizzazione della topologia di rete con Linux
 
-### Script: Network Namespaces
-Questo script realizza la topologia vista a lezione sfruttando i Namespace di Linux e Open-vSwitch
+## Esercizio: Realizzare una semplice topologia composta da due Linux namespace che comunicano attraverso uno switch Open-vSwitch.
 
 - Crea due namespace
 - Crea un bridge in Open-vSwitch

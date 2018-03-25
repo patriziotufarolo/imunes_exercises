@@ -8,8 +8,33 @@ echo "------------------------------------"
 echo "Autore: Patrizio Tufarolo <patrizio@tufarolo.eu>"
 echo
 
-Color_Off='\e[0m' 
-Purple='\e[0;35m'
+
+# MIT License
+#  
+# Copyright (c) 2018 Patrizio Tufarolo
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+##
+
+Color_Off='\e[0m'
+bldgrn='\e[1;32m'
+
 ok_colorato_per_log() {
         RED=$(tput setaf 1)
         GREEN=$(tput setaf 2)
@@ -17,31 +42,36 @@ ok_colorato_per_log() {
         LENMSG="$1"
         let COL=$(tput cols)-${LENMSG}
         printf "%${COL}s%s%s%s%s%s" "$NORMAL" "[" "$GREEN" "OK" "$NORMAL" "]"
-        echo ---
 }
 do_cmd() {
-	local cmd;
-	local msg;
-	cmd="$1"
-	msg="$2"
-	echo -e $Purple $cmd $Color_Off;
-	echo -n $msg
-	eval "$cmd" 2>/dev/null 1>/dev/null
-	ok_colorato_per_log ${#msg}
-	read -rsp $'\nPremere invio per continuare...\n'
+        local cmd;
+        local msg;
+        cmd="$1"
+        msg="$2"
+        echo
+        echo -e ${bldgrn}"${cmd}"${Color_Off}
+        eval "$cmd" 2>/dev/null
+        echo
+        echo -n "$msg"
+        ok_colorato_per_log ${#msg}
+        read -rsp $'\nPremere invio per continuare...\n'
 }
 do_cmd_pid() {
-	local cmd;
-	local msg;
-	local pid;
-	cmd="$1"
-	msg="$2"
-	echo -e $Purple $cmd $Color_Off;
-	echo -n $msg
-	eval "$cmd"
-	pid="$!"
-	echo $pid > .pid
-	ok_colorato_per_log ${#msg}
+        local cmd;
+        local msg;
+        local pid;
+        local __resultvar=$3;
+        cmd="$1"
+        msg="$2"
+
+        echo
+        echo -e $bldgrn $cmd $Color_Off;
+        eval "$cmd & "
+        pid=$!
+        echo -n "$msg"
+        ok_colorato_per_log ${#msg}
+        read -rsp $'\nPremere invio per continuare...\n'
+        eval $__resultvar=$pid;
 }
 
 sudo -i exit
@@ -69,7 +99,17 @@ do_cmd "sudo ip netns exec h1 ip link set up dev h1-eth0"			"=> Accendo l'interf
 do_cmd "sudo ip netns exec h2 ip link set up dev h2-lo" 			"=> Accendo l'interfaccia h2-lo"
 do_cmd "sudo ip netns exec h2 ip link set up dev h2-eth0"			"=> Accendo l'interfaccia h2-eth0"
 
-do_cmd_pid 	"sudo ip netns exec h1 python2 -m SimpleHTTPServer 80 &"	"=> Avvio un server HTTP sulla porta 80 di h1"
+do_cmd_pid 	"sudo xterm -e 'ip netns exec h1 python2 -m SimpleHTTPServer 80'"	"=> Avvio un server HTTP sulla porta 80 di h1"	pid1
 do_cmd		"sudo ip netns exec h2 firefox 10.0.0.1"			"=> Avvio Firefox su h2 e lo faccio connettere al server HTTP di h1"
+
+
+
+child_pid=$(ps --pid $pid1 -o pid=)
+if sudo kill -0 $pid1; then
+	sudo kill $pid1
+fi
+if sudo kill -0 $child_pid; then
+	sudo kill $child_pid
+fi
 
 ./cleanup.sh

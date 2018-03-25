@@ -80,23 +80,28 @@ sudo -i exit
 
 EXPERIMENT="$(sudo himage -e pc1)"
 
-do_cmd_pid "xterm -e 'sudo himage pc3 arpspoof -i eth0 -t 10.0.0.20 10.0.0.21'"				"=> Avvio arpspoofing con target 10.0.0.20 su PC3" pid1
-do_cmd_pid "xterm -e 'sudo himage pc3 arpspoof -i eth0 -t 10.0.0.21 10.0.0.20'"				"=> Avvio arpspoofing con target 10.0.0.21 su PC3" pid2 
-do_cmd_pid "xterm -e 'sudo himage pc3 tcpdump -i eth0 icmp'"						"=> Avvio arpspoofing tcpdump su PC3" pid3
+do_cmd_pid "sudo xterm -e 'himage pc3 arpspoof -i eth0 -t 10.0.0.20 10.0.0.21'"				"=> Avvio arpspoofing con target 10.0.0.20 su PC3" pid1
+do_cmd_pid "sudo xterm -e 'himage pc3 arpspoof -i eth0 -t 10.0.0.21 10.0.0.20'"				"=> Avvio arpspoofing con target 10.0.0.21 su PC3" pid2 
+do_cmd_pid "sudo xterm -e 'himage pc3 tcpdump -i eth0 icmp'"						"=> Avvio arpspoofing tcpdump su PC3" pid3
 do_cmd "sudo himage pc3 sysctl net.ipv4.conf.eth0.send_redirects=0"					"=> Disabilita ICMP redirect su PC3"
 do_cmd "sudo himage pc1 ping -c 5 10.0.0.21"								"=> Lancio un ping da PC1 a PC2"
 do_cmd "sudo himage pc1 ip neigh"									"=> Stampo la tabella ARP PC1"
 do_cmd "sudo himage pc2 ip neigh"									"=> Stampo la tabella ARP PC2"
 read -rsp $'\nPremere invio nuovamente per chiudere XTERM...\n'
 
-if kill -0 $pid1; then 
-sudo kill -9 $pid1 1>/dev/null 2>/dev/null;
+child_pid1=$(ps --ppid $pid1 -o pid=)
+child_pid2=$(ps --ppid $pid2 -o pid=)
+child_pid3=$(ps --ppid $pid3 -o pid=)
+
+if sudo kill -0 $child_pid1; then 
+sudo kill -9 $child_pid1 1>/dev/null 2>/dev/null;
 fi
 
-if kill -0 $pid2; then
-sudo kill -9 $pid2 1>/dev/null 2>/dev/null;
+if sudo kill -0 $child_pid2; then
+sudo kill -9 $child_pid2 1>/dev/null 2>/dev/null;
 fi
 
-if kill -0 $pid3; then
-sudo kill -9 $pid3 1>/dev/null 2>/dev/null;
+if sudo kill -0 $child_pid3; then
+sudo kill -9 $child_pid3 1>/dev/null 2>/dev/null;
 fi
+

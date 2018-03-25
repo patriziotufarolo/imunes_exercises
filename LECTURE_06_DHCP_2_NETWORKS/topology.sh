@@ -91,7 +91,7 @@ subnet 192.168.0.48 netmask 255.255.255.248 {
 }
 EOF'" "Configuro il server DHCP"
 
-do_cmd_pid "xterm -e 'sudo himage DHCPServer dhcpd -d'" "Avvio il server DHCP" pid1
+do_cmd_pid "sudo xterm -e 'himage DHCPServer dhcpd -d'" "Avvio il server DHCP" pid1
 
 for pcid in {1..6}; do
 do_cmd "sudo himage pc${pcid} dhclient eth0" "Avvio il client DHCP su pc${pcid}"
@@ -100,6 +100,7 @@ for pcid in {1..6}; do
 do_cmd "sudo himage pc${pcid} ip addr show dev eth0" "Mostro l'ip di pc${pcid}"
 done
 
-if kill -0 $pid1; then
-	kill -9 $pid1
+child_pid=$(ps --ppid $pid1 -o pid=)
+if sudo kill -0 $child_pid; then
+	sudo kill $child_pid
 fi

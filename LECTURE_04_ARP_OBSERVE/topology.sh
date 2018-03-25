@@ -79,15 +79,11 @@ sudo -i exit
 EXPERIMENT="$(sudo himage -e pc1)"
 
 do_cmd "sudo himage pc1 ip neigh flush 10.0.0.21"						"=> Flush ARP" 
-do_cmd_pid "sudo xterm -e 'himage PCSonda tcpdump -i eth0 arp'"					"=> Avvio TCPDump su PCSonda in una XTERM separata"	pid
+do_cmd_pid "sudo xterm -e 'himage PCSonda tcpdump -i eth0 arp'"					"=> Avvio TCPDump su PCSonda in una XTERM separata"	pid1
 do_cmd "sudo himage pc1 ping -c 1 10.0.0.21"							"=> Effettuo il PING"
 do_cmd "sudo himage pc1 ip neigh"								"=> Stampo la tabella ARP"
 read -rsp $'\nPremere invio nuovamente per chiudere XTERM...\n'
-
-child_pid=$(ps --pid $pid -o pid=)
-if kill -0 $pid; then
-	sudo kill $pid 1>/dev/null 2>/dev/null;
-fi
-if kill -0 $child_pid; then
+child_pid=$(ps --ppid $pid1 -o pid=)
+if sudo kill -0 $child_pid; then
 	sudo kill $child_pid 1>/dev/null 2>/dev/null;
 fi

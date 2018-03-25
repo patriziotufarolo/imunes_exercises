@@ -83,17 +83,17 @@ do_cmd "sudo himage pc1 ip addr add 10.0.0.2/24 dev eth0" "Configuro l'ip 10.0.0
 do_cmd "sudo himage pc2 ip addr add 10.0.1.2/24 dev eth0" "Configuro l'ip 10.0.0.2/24 sul PC2"
 do_cmd "sudo himage pc1 ip route add 10.0.1.2 via 10.0.0.1" "Imposto la rotta per raggiungere 10.0.1.2 (PC1) tramite 10.0.0.1 (Router/eth0) su PC1"
 do_cmd "sudo himage pc2 ip route add 10.0.0.2 via 10.0.1.1" "Imposto la rotta per raggiungere 10.0.0.2 (PC1) tramite 10.0.1.1 (Router/eth1) su PC2"
-do_cmd_pid "xterm -e 'sudo himage router1 tcpdump -i eth0 icmp'" "Apro tcpdump su eth0" pid1
-do_cmd_pid "xterm -e 'sudo himage router1 tcpdump -i eth1 icmp'" "Apro tcpdump su eth1" pid2
+do_cmd_pid "sudo xterm -e 'himage router1 tcpdump -i eth0 icmp'" "Apro tcpdump su eth0" pid1
+do_cmd_pid "sudo xterm -e 'himage router1 tcpdump -i eth1 icmp'" "Apro tcpdump su eth1" pid2
 do_cmd "sudo himage pc1 ping -c5 10.0.1.2" "PING pc1 => pc2"
 do_cmd "sudo himage pc2 ping -c5 10.0.0.2" "PING pc1 => pc2"
 
 read -rsp $'\nPremere nuovamente invio per chiudere XTerm\n'
-
-echo $pid1 $pid2
-if kill -0 $pid1; then
-	kill -9 $pid1
+child_pid1=$(ps --ppid $pid1 -o pid=)
+child_pid2=$(ps --ppid $pid2 -o pid=)
+if sudo kill -0 $child_pid1; then
+	sudo kill $child_pid1
 fi
-if kill -0 $pid2; then
-	kill -9 $pid2
+if sudo kill -0 $child_pid2; then
+	sudo kill $child_pid2
 fi

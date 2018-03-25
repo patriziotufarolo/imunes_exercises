@@ -91,15 +91,17 @@ subnet 172.16.0.0 netmask 255.255.0.0 {
 }
 EOF'" "Configuro il server DHCP"
 
-do_cmd_pid "xterm -e 'sudo himage DHCPServer dhcpd -d'" "Avvio il server DHCP" pid1
-do_cmd_pid "xterm -e 'sudo himage DHCPServer tcpdump'" "Apro TCPDump" pid2
+do_cmd_pid "sudo xterm -e 'himage DHCPServer dhcpd -d'" "Avvio il server DHCP" pid1
+do_cmd_pid "sudo xterm -e 'himage DHCPServer tcpdump'" "Apro TCPDump" pid2
 for pcid in {1..4}; do
 do_cmd "sudo himage pc${pcid} dhclient eth0" "Avvio il client DHCP su pc${pcid}"
 done
 read -rsp $'\nPremere nuovamente invio per chiudere XTerm\n'
-if kill -0 $pid1; then
-kill -9 $pid1
+child_pid1=$(ps --ppid $pid1 -o pid=)
+if sudo kill -0 $pid1; then
+sudo kill $pid1
 fi
-if kill -0 $pid2; then
-kill -9 $pid2
+child_pid2=$(ps --ppid $pid2 -o pid=)
+if sudo kill -0 $pid2; then
+sudo kill $pid2
 fi
